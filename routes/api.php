@@ -27,6 +27,7 @@ use App\Http\Controllers\PemesananController;
 
 Route::post("/login", [AuthController::class, "login"])->name("login");
 Route::get("/me", [AuthController::class, "getUser"])->middleware(["auth:sanctum"]);
+Route::post("/user/{id}/update", [AuthController::class, "updateUser"])->middleware(["auth:sanctum"]);
 
 Route::get("/guru", [GuruController::class, "index"]);
 Route::get("/guru/{id}", [GuruController::class, "show"]);

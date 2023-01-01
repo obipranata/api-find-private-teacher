@@ -55,4 +55,31 @@ class AuthController extends Controller
             "data" => $user
         ]);
     }
+
+    public function updateUser(Request $request, $id)
+    {
+        $password = $request->input('password');
+        if (!isset($password)) {
+            $payload = $request->except(['password']);
+        } else {
+            $payload = $request->all();
+        }
+
+
+        $user = User::query()->where('id', $id)->first();
+
+        if ($user) {
+            $user->update($payload);
+            return response()->json([
+                "status" => true,
+                "message" => "data berhasil di update",
+                "data" => $user
+            ]);
+        }
+        return response()->json([
+            "status" => false,
+            "message" => "data gagal diupdate",
+            "data" => null
+        ]);
+    }
 }
